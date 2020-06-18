@@ -61,8 +61,8 @@ public class Article extends Dto {
 
 	@Override
 	public String toString() {
-		return String.format("%n게시판 번호 : %s 회원 아이디 : %s%n게시 번호 : %s 게시 날짜 : %s%n제목 : %s%n내용 : %s%n%n ", boardId,
-				memberId, getId(), getRegDate(), title, body);
+		return String.format("%n제목 : %s%n게시판 번호 : %s 회원 아이디 : %s%n게시 번호 : %s 게시 날짜 : %s%n내용 : %s%n%n ",title, boardId,
+				memberId, getId(), getRegDate(),  body);
 	}
 
 
