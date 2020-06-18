@@ -30,11 +30,11 @@ public class ArticleDao {
 
 		List<Article> articles = new ArrayList<>();
 		List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
-		
-		for ( Map<String, Object> row : rows ) {
+
+		for (Map<String, Object> row : rows) {
 			articles.add(new Article(row));
 		}
-		
+
 		return articles;
 	}
 
@@ -48,11 +48,11 @@ public class ArticleDao {
 
 		List<Board> boards = new ArrayList<>();
 		List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
-		
-		for ( Map<String, Object> row : rows ) {
+
+		for (Map<String, Object> row : rows) {
 			boards.add(new Board(row));
 		}
-		
+
 		return boards;
 	}
 
@@ -65,11 +65,11 @@ public class ArticleDao {
 		sb.append(String.format("AND `code` = '%s' ", code));
 
 		Map<String, Object> row = dbConnection.selectRow(sb.toString());
-		
-		if ( row.isEmpty() ) {
+
+		if (row.isEmpty()) {
 			return null;
 		}
-		
+
 		return new Board(row);
 	}
 
@@ -106,11 +106,11 @@ public class ArticleDao {
 		sb.append(String.format("AND `id` = '%d' ", id));
 
 		Map<String, Object> row = dbConnection.selectRow(sb.toString());
-		
-		if ( row.isEmpty() ) {
+
+		if (row.isEmpty()) {
 			return null;
 		}
-		
+
 		return new Board(row);
 	}
 
@@ -124,12 +124,44 @@ public class ArticleDao {
 
 		List<Article> articles = new ArrayList<>();
 		List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
-		
-		for ( Map<String, Object> row : rows ) {
+
+		for (Map<String, Object> row : rows) {
 			articles.add(new Article(row));
 		}
-		
+
 		return articles;
+	}
+
+	public void modify(int num, String title, String body) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(String.format("UPDATE article "));
+		sql.append(String.format("SET title = '" + title + "', "));
+		sql.append(String.format("`body` = '" + body + "' "));
+		sql.append(String.format("WHERE id = " + num + ";"));
+
+		dbConnection.insert(sql.toString());
+	}
+
+	public void delete(int num) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(String.format("DELETE FROM article "));
+		sql.append(String.format("WHERE id = " + num + ";"));
+		
+		dbConnection.delete(sql.toString());
+	}
+
+	public Article detail(int num) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(String.format("SELECT *"));
+		sql.append(String.format("FROM article "));
+		sql.append(String.format("WHERE id = " + num + ";"));
+		
+		Map<String, Object> row= dbConnection.selectRow(sql.toString());
+		Article article = new Article(row);
+			return article;
 	}
 
 }

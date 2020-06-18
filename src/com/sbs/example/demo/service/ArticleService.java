@@ -58,4 +58,16 @@ public class ArticleService {
 		return articleDao.getBoardByCode(boardCode);
 	}
 
+	public void modify(int num, String title, String body) {
+		articleDao.modify(num,title,body);
+	}
+
+	public void delete(int num) {
+		articleDao.delete(num);
+	}
+
+	public Article detail(int num) {
+		return articleDao.detail(num);
+	}
+
 }
