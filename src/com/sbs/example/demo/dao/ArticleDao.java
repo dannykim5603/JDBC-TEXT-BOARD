@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.sbs.example.demo.db.DBConnection;
 import com.sbs.example.demo.dto.Article;
+import com.sbs.example.demo.dto.ArticleReply;
 import com.sbs.example.demo.dto.Board;
 import com.sbs.example.demo.factory.Factory;
 
@@ -161,7 +162,38 @@ public class ArticleDao {
 		
 		Map<String, Object> row= dbConnection.selectRow(sql.toString());
 		Article article = new Article(row);
+		
 			return article;
+	}
+
+	public int saveReply(ArticleReply articleReply) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(String.format("INSERT INTO articleReply "));
+		sb.append(String.format("SET regDate = '%s' ", articleReply.getRegDate()));
+		sb.append(String.format(", `body` = '%s' ", articleReply.getBody()));
+		sb.append(String.format(", `memberId` = '%d' ", articleReply.getMemberId()));
+		sb.append(String.format(", `articleId` = '%d' ", articleReply.getArticleId()));
+
+		return dbConnection.insert(sb.toString());
+	}
+
+	public List<ArticleReply> getArticleReplyByArticleId(int id) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(String.format("SELECT * "));
+		sb.append(String.format("FROM `articleReply` "));
+		sb.append(String.format("WHERE articleId = '%d' ",id));
+		sb.append(String.format("ORDER BY id DESC "));
+
+		List<ArticleReply> articleReplies = new ArrayList<>();
+		List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
+
+		for (Map<String, Object> row : rows) {
+			
+			articleReplies.add(new ArticleReply(row));
+		}
+		return articleReplies;
 	}
 
 }

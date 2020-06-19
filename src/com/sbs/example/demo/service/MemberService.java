@@ -37,4 +37,8 @@ public class MemberService {
 			join("admin", "admin", "관리자");
 		}
 	}
+
+	public Member getMemberByLoginId(String loginId) {
+		return memberDao.getMemberByLoginId(loginId);
+	}
 }

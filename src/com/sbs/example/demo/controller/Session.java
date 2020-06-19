@@ -1,7 +1,9 @@
 package com.sbs.example.demo.controller;
 
 import com.sbs.example.demo.dto.Board;
+import com.sbs.example.demo.dto.Dto;
 import com.sbs.example.demo.dto.Member;
+import com.sbs.example.demo.dto.Article;
 
 // Session
 // 현재 사용자가 이용중인 정보
@@ -9,6 +11,7 @@ import com.sbs.example.demo.dto.Member;
 public class Session {
 	private Member loginedMember;
 	private Board currentBoard;
+	private Article currentArticle;
 
 	public Member getLoginedMember() {
 		return loginedMember;
@@ -29,4 +32,13 @@ public class Session {
 	public boolean isLogined() {
 		return loginedMember != null;
 	}
+
+	public Article getCurrentArticle() {
+		return currentArticle;
+	}
+
+	public void setCurrentArticle(Article currentArticle) {
+		this.currentArticle = currentArticle;
+	}
+
 }

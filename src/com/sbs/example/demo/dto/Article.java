@@ -25,6 +25,7 @@ public class Article extends Dto {
 		this.body = (String) row.get("body");
 		this.memberId = (int) row.get("memberId");
 		this.boardId = (int) row.get("boardId");
+		
 	}
 
 	public int getBoardId() {

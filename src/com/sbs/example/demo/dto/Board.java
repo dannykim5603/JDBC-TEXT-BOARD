@@ -3,6 +3,11 @@ package com.sbs.example.demo.dto;
 import java.util.Map;
 
 public class Board extends Dto {
+	@Override
+	public String toString() {
+		return String.format(" getId()=%s name=%s code=%s",getId(), name, code );
+	}
+
 	private String name;
 	private String code;
 
