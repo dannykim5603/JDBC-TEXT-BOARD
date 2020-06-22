@@ -196,4 +196,36 @@ public class ArticleDao {
 		return articleReplies;
 	}
 
+	public ArticleReply getArticleReplyById(int id) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(String.format("SELECT * "));
+		sb.append(String.format("FROM `articleReply` "));
+		sb.append(String.format("WHERE Id = '%d' ",id));
+		sb.append(String.format("ORDER BY id DESC "));
+
+		Map<String, Object> row = dbConnection.selectRow(sb.toString());
+
+		ArticleReply articleReply = new ArticleReply(row);
+
+		return articleReply;
+	}
+
+	public void deleteReply(int id) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(String.format("DELETE FROM `articleReply` "));
+		sql.append(String.format("WHERE id = " + id + ";"));
+		
+		dbConnection.delete(sql.toString());
+	}
+
+	public void deleteBoardBycode(int id) {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(String.format("DELETE FROM `board` "));
+		sql.append(String.format("WHERE id = %d ;",id));
+		dbConnection.delete(sql.toString());
+	}
+
 }

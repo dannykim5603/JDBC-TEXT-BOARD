@@ -80,4 +80,16 @@ public class ArticleService {
 		return articleDao.getArticleReplyByArticleId(id);
 	}
 
+	public ArticleReply getReplyById(int id) {
+		return articleDao.getArticleReplyById(id);
+	}
+
+	public void deleteReply(int id) {
+		articleDao.deleteReply(id);
+	}
+
+	public void deleteBoard(int id) {
+		articleDao.deleteBoardBycode(id);
+	}
+
 }
